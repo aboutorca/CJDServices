@@ -1,4 +1,5 @@
 import { cn } from '../lib/utils'
+import Image from 'next/image'
 
 export const Logo = ({ className, size = 'default' }: { className?: string; size?: 'small' | 'default' | 'medium' | 'large' }) => {
     const sizeClasses = {
@@ -9,9 +10,11 @@ export const Logo = ({ className, size = 'default' }: { className?: string; size
     }
     
     return (
-        <img 
+        <Image 
             src="/Horizontal Logo.svg"
             alt="Company Logo"
+            width={size === 'small' ? 80 : size === 'default' ? 100 : size === 'medium' ? 120 : 300}
+            height={size === 'small' ? 24 : size === 'default' ? 32 : size === 'medium' ? 40 : 96}
             className={cn('text-foreground w-auto', sizeClasses[size], className)}
         />
     )
