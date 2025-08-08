@@ -54,7 +54,7 @@ export default function FAQsTwo() {
                     </Accordion>
 
                     <p className="text-muted-foreground mt-6 px-8">
-                        Can't find what you're looking for? Contact our{' '}
+                        Can&#39;t find what you&#39;re looking for? Contact our{' '}
                         <Link
                             href="mailto:info@CJDservice.com"
                             className="text-primary font-medium hover:underline">
