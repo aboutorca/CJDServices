@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useForm as useFormspree } from "@formspree/react"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -34,6 +35,8 @@ const formSchema = z.object({
 })
 
 export default function ContactForm() {
+  const [state, handleFormspreeSubmit] = useFormspree("xovlrjgn")
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,9 +50,31 @@ export default function ContactForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    // Here you would typically send the form data to your backend
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Submit to Formspree
+    await handleFormspreeSubmit(values)
+  }
+
+  // Show success message if form was submitted successfully
+  if (state.succeeded) {
+    return (
+      <section id="contact" className="py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 md:px-6">
+          <div className="mx-auto max-w-xl text-center">
+            <h2 className="text-balance text-3xl font-bold md:text-4xl lg:text-5xl">Thank You!</h2>
+            <p className="text-muted-foreground mt-4 text-balance">
+              We've received your message and will get back to you quickly—usually the same day.
+            </p>
+            <Button 
+              onClick={() => window.location.reload()} 
+              className="mt-6"
+            >
+              Send Another Message
+            </Button>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -201,7 +226,9 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">Send Request</Button>
+              <Button type="submit" className="w-full" disabled={state.submitting}>
+                {state.submitting ? "Sending..." : "Send Request"}
+              </Button>
             </form>
           </Form>
         </div>
