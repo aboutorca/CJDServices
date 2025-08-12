@@ -63,7 +63,7 @@ export default function ContactForm() {
           <div className="mx-auto max-w-xl text-center">
             <h2 className="text-balance text-3xl font-bold md:text-4xl lg:text-5xl">Thank You!</h2>
             <p className="text-muted-foreground mt-4 text-balance">
-              We've received your message and will get back to you quickly—usually the same day.
+              We&apos;ve received your message and will get back to you quickly—usually the same day.
             </p>
             <Button 
               onClick={() => window.location.reload()} 
